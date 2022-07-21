@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../authentications/firebase";
 
 
-const ProtectedComponent = ({ children }) => {
+const ProtectedComponent = ({ children, path= "/login" }) => {
   const navigate = useNavigate();
 
   
@@ -15,10 +15,10 @@ const ProtectedComponent = ({ children }) => {
   useEffect(() => {
    
     if (!user) {
-      navigate("/");
+      navigate(path);
       return;
     }
-  }, [user, navigate]);
+  }, [user, navigate, path]);
 
   
   if (isLoading) {
