@@ -1,15 +1,37 @@
 import React from "react";
-import NavBar from "./components/NavBar";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from './containers/LoginPage';
+import RegisterPage from "./containers/RegisterPage";
+import ProtectedComponent from "./components/ProtectedComponent";
 import HomePage from "./containers/HomePage";
-//import logo from './logo.svg';
-//import './App.css';
+import NavBar from "./components/NavBar";
+import DetailPage from "./containers/DetailPage";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar/>
-      <HomePage/>
-    </div>
+    <Routes>
+        {/* Kita akan gunakan di sini dan nge-slot App */}
+        <Route
+          path="*"
+          element={
+            <ProtectedComponent>
+              <NavBar />
+              <HomePage />
+            </ProtectedComponent>
+          }
+        />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route
+          path="detail"
+          element={
+            <>
+              <NavBar />
+              <DetailPage />
+            </>
+          }
+        />
+    </Routes>
   );
 }
 
